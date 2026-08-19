@@ -1,7 +1,4 @@
-import Image from "next/image";
-
+import Body from "@/components/body";
 export default function Home() {
-  return (
-    <h1>hello</h1>
-  );
+  return <Body />;
 }
