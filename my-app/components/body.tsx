@@ -114,7 +114,7 @@ export default function Body() {
 
   if (showProduct) {
     return (
-      <main className="min-h-screen bg-white px-4 py-8 text-black sm:px-8 lg:px-12">
+      <main className="min-h-screen bg-white py-8 text-black sm:px-8 lg:px-12">
         <button
           type="button"
           onClick={() => setShowProduct(false)}
@@ -132,10 +132,17 @@ export default function Body() {
                   type="button"
                   onClick={() => setSelectedImage(image)}
                   className={`relative h-[70px] w-[70px] overflow-hidden rounded border-2 ${
-                    selectedImage === image ? "border-black" : "border-transparent"
+                    selectedImage === image
+                      ? "border-black"
+                      : "border-transparent"
                   }`}
                 >
-                  <Image src={image} alt="Hoodie thumbnail" fill className="object-cover" />
+                  <Image
+                    src={image}
+                    alt="Hoodie thumbnail"
+                    fill
+                    className="object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -154,14 +161,28 @@ export default function Body() {
           <section className="py-1">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="mb-4 inline-block rounded-full border border-blue-500 px-3 py-1 text-xs">NEW</p>
-                <h1 className="text-3xl font-bold sm:text-4xl">Wildflower Hoodie</h1>
+                <p className="mb-4 inline-block rounded-full border border-blue-500 px-3 py-1 text-xs">
+                  NEW
+                </p>
+                <h1 className="text-3xl font-bold sm:text-4xl">
+                  Wildflower Hoodie
+                </h1>
               </div>
-              <button type="button" aria-label="Add to favorites" className="text-3xl">♡</button>
+              <button
+                type="button"
+                aria-label="Add to favorites"
+                className="text-3xl"
+              >
+                ♡
+              </button>
             </div>
-            <p className="mt-4 text-lg">Cotton hoodie with a wildflower graphic.</p>
+            <p className="mt-4 text-lg">
+              Cotton hoodie with a wildflower graphic.
+            </p>
 
-            <h2 className="mt-7 mb-3 text-base font-normal underline underline-offset-4">Choose a size</h2>
+            <h2 className="mt-7 mb-3 text-base font-normal underline underline-offset-4">
+              Choose a size
+            </h2>
             <div className="flex gap-2">
               {["S", "M", "L", "XL", "2XL"].map((size) => (
                 <button
@@ -169,7 +190,9 @@ export default function Body() {
                   type="button"
                   onClick={() => setSelectedSize(size)}
                   className={`h-10 min-w-10 rounded-full border px-3 ${
-                    selectedSize === size ? "bg-black text-white" : "bg-white text-black"
+                    selectedSize === size
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
                   }`}
                 >
                   {size}
@@ -178,17 +201,43 @@ export default function Body() {
             </div>
 
             <div className="mt-5 flex items-center gap-5">
-              <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} className="h-10 w-10 rounded-full border text-xl">-</button>
+              <button
+                type="button"
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="h-10 w-10 rounded-full border text-xl"
+              >
+                -
+              </button>
               <span>{quantity}</span>
-              <button type="button" onClick={() => setQuantity(quantity + 1)} className="h-10 w-10 rounded-full border text-xl">+</button>
+              <button
+                type="button"
+                onClick={() => setQuantity(quantity + 1)}
+                className="h-10 w-10 rounded-full border text-xl"
+              >
+                +
+              </button>
             </div>
 
             <p className="mt-7 text-2xl font-bold">120’000₮</p>
-            <button type="button" className="mt-3 w-full rounded-full bg-blue-600 px-6 py-3 text-lg text-white hover:bg-blue-700">Add to cart</button>
+            <button
+              type="button"
+              className="mt-3 w-full rounded-full bg-blue-600 px-6 py-3 text-lg text-white hover:bg-blue-700"
+            >
+              Add to cart
+            </button>
 
             <div className="mt-16 border-b pb-5">
-              <p className="mb-2">Rating <a href="#reviews" className="ml-4 text-blue-600 underline">Read all reviews</a></p>
-              <p className="text-xl text-yellow-400">★★★★★ <span className="ml-2 text-base font-bold text-black">4.6</span> <span className="text-sm text-gray-500">(24)</span></p>
+              <p className="mb-2">
+                Rating{" "}
+                <a href="#reviews" className="ml-4 text-blue-600 underline">
+                  Read all reviews
+                </a>
+              </p>
+              <p className="text-xl text-yellow-400">
+                ★★★★★{" "}
+                <span className="ml-2 text-base font-bold text-black">4.6</span>{" "}
+                <span className="text-sm text-gray-500">(24)</span>
+              </p>
             </div>
             <Reviews />
           </section>
