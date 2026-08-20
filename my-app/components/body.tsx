@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import Reviews from "./reviews";
 
 const products = [
   {
@@ -96,9 +100,111 @@ const products = [
 ];
 
 export default function Body() {
+  const [showProduct, setShowProduct] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("/hoodie.png");
+  const [selectedSize, setSelectedSize] = useState("S");
+  const [quantity, setQuantity] = useState(1);
+
+  const productImages = [
+    "/hoodie.png",
+    "/similar.png",
+    "/main body similar.png",
+    "/green hoodie.webp",
+  ];
+
+  if (showProduct) {
+    return (
+      <main className="min-h-screen bg-white px-4 py-8 text-black sm:px-8 lg:px-12">
+        <button
+          type="button"
+          onClick={() => setShowProduct(false)}
+          className="mb-6 text-sm underline underline-offset-4"
+        >
+          Back to products
+        </button>
+
+        <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[1fr_1fr] lg:gap-10">
+          <div className="grid gap-4 sm:grid-cols-[82px_1fr]">
+            <div className="order-2 flex gap-3 sm:order-1 sm:flex-col">
+              {productImages.map((image) => (
+                <button
+                  key={image}
+                  type="button"
+                  onClick={() => setSelectedImage(image)}
+                  className={`relative h-[70px] w-[70px] overflow-hidden rounded border-2 ${
+                    selectedImage === image ? "border-black" : "border-transparent"
+                  }`}
+                >
+                  <Image src={image} alt="Hoodie thumbnail" fill className="object-cover" />
+                </button>
+              ))}
+            </div>
+            <div className="relative order-1 aspect-[4/5] overflow-hidden rounded-2xl bg-[#9bbfd2] sm:order-2">
+              <Image
+                src={selectedImage}
+                alt="Wildflower Hoodie"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          <section className="py-1">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="mb-4 inline-block rounded-full border border-blue-500 px-3 py-1 text-xs">NEW</p>
+                <h1 className="text-3xl font-bold sm:text-4xl">Wildflower Hoodie</h1>
+              </div>
+              <button type="button" aria-label="Add to favorites" className="text-3xl">♡</button>
+            </div>
+            <p className="mt-4 text-lg">Cotton hoodie with a wildflower graphic.</p>
+
+            <h2 className="mt-7 mb-3 text-base font-normal underline underline-offset-4">Choose a size</h2>
+            <div className="flex gap-2">
+              {["S", "M", "L", "XL", "2XL"].map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  onClick={() => setSelectedSize(size)}
+                  className={`h-10 min-w-10 rounded-full border px-3 ${
+                    selectedSize === size ? "bg-black text-white" : "bg-white text-black"
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-5 flex items-center gap-5">
+              <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} className="h-10 w-10 rounded-full border text-xl">-</button>
+              <span>{quantity}</span>
+              <button type="button" onClick={() => setQuantity(quantity + 1)} className="h-10 w-10 rounded-full border text-xl">+</button>
+            </div>
+
+            <p className="mt-7 text-2xl font-bold">120’000₮</p>
+            <button type="button" className="mt-3 w-full rounded-full bg-blue-600 px-6 py-3 text-lg text-white hover:bg-blue-700">Add to cart</button>
+
+            <div className="mt-16 border-b pb-5">
+              <p className="mb-2">Rating <a href="#reviews" className="ml-4 text-blue-600 underline">Read all reviews</a></p>
+              <p className="text-xl text-yellow-400">★★★★★ <span className="ml-2 text-base font-bold text-black">4.6</span> <span className="text-sm text-gray-500">(24)</span></p>
+            </div>
+            <Reviews />
+          </section>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white pb-20 text-black">
-      <div className="relative mx-auto aspect-[2/1] max-w-[1280px] overflow-hidden bg-[#9bbfd2] sm:aspect-[2.65/1]">
+      <button
+        type="button"
+        onClick={() => setShowProduct(true)}
+        aria-label="View Wildflower Hoodie details"
+        className="relative block w-full mx-auto aspect-[2/1] max-w-[1280px] overflow-hidden bg-[#9bbfd2] text-left sm:aspect-[2.65/1]"
+      >
         <Image
           src="/hoodie.png"
           alt="Black hoodie with blue flower artwork"
@@ -111,7 +217,7 @@ export default function Body() {
           <h3 className="text-[18px] leading-7">Wildflower Hoodie</h3>
           <h1 className="text-[36px] font-bold leading-[1.2]">120’000₮</h1>
         </div>
-      </div>
+      </button>
 
       <div className="mx-auto mt-5 max-w-[1034px] px-4 sm:px-0">
         <div className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-4 sm:gap-x-[18px] sm:gap-y-8">
