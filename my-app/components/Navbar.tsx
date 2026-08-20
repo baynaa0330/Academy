@@ -1,4 +1,4 @@
-export default function Navbar() {
+const Navbar = () => {
   return (
     <nav className="flex items-center justify-between bg-black p-4 text-white">
       {/* Left: Logo & Category */}
@@ -11,9 +11,9 @@ export default function Navbar() {
 
       {/* Middle: Search Bar */}
       <div className="flex-1 max-w-md mx-4">
-        <input 
-          type="text" 
-          placeholder="Бүтээгдэхүүн хайх" 
+        <input
+          type="text"
+          placeholder="Бүтээгдэхүүн хайх"
           className="w-full bg-gray-900 rounded px-4 py-1 text-sm text-gray-300"
         />
       </div>
@@ -37,4 +37,5 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
+export default Navbar;
